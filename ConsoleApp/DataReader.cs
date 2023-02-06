@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
-using System.Text;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using ConsoleApp.Extensions;
 namespace ConsoleApp
 {
