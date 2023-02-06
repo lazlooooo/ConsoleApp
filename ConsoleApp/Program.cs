@@ -11,8 +11,15 @@
     {
         static void Main(string[] args)
         {
-            var reader = new DataReader();
-            reader.ImportAndPrintData("dataa.csv");
+            try
+            {
+                var reader = new DataReader();
+                reader.ImportAndPrint("data.csv");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
