@@ -24,11 +24,12 @@
                 importedLines.Add(line);
             }
 
-            for (int i = 0; i <= importedLines.Count; i++)
+            for (int i = 0; i < importedLines.Count; i++)
             {
                 var importedLine = importedLines[i];
                 var values = importedLine.Split(';');
                 var importedObject = new ImportedObject();
+                if (values.Length < 7) continue;
                 importedObject.Type = values[0];
                 importedObject.Name = values[1];
                 importedObject.Schema = values[2];
@@ -42,11 +43,11 @@
             // clear and correct imported data
             foreach (var importedObject in ImportedObjects)
             {
-                importedObject.Type = importedObject.Type.Trim().Replace(" ", "").Replace(Environment.NewLine, "").ToUpper();
-                importedObject.Name = importedObject.Name.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                importedObject.Schema = importedObject.Schema.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                importedObject.ParentName = importedObject.ParentName.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
-                importedObject.ParentType = importedObject.ParentType.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
+                importedObject.Type = importedObject.Type?.Trim().Replace(" ", "").Replace(Environment.NewLine, "").ToUpper();
+                importedObject.Name = importedObject.Name?.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
+                importedObject.Schema = importedObject.Schema?.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
+                importedObject.ParentName = importedObject.ParentName?.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
+                importedObject.ParentType = importedObject.ParentType?.Trim().Replace(" ", "").Replace(Environment.NewLine, "");
             }
 
             // assign number of children
@@ -74,7 +75,7 @@
                     // print all database's tables
                     foreach (var table in ImportedObjects)
                     {
-                        if (table.ParentType.ToUpper() == database.Type)
+                        if (table.ParentType?.ToUpper() == database.Type)
                         {
                             if (table.ParentName == database.Name)
                             {
@@ -83,7 +84,7 @@
                                 // print all table's columns
                                 foreach (var column in ImportedObjects)
                                 {
-                                    if (column.ParentType.ToUpper() == table.Type)
+                                    if (column.ParentType?.ToUpper() == table.Type)
                                     {
                                         if (column.ParentName == table.Name)
                                         {
